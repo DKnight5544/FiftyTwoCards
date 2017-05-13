@@ -1,0 +1,27 @@
+﻿html, body {
+    padding:0px;
+    margin:0px;
+}
+
+#mainContainer{
+    margin-top:10px;
+    margin-left:5px;
+    max-width:1100px;
+}
+
+.card{
+    height:119px;
+    width:75px;
+    border:2px solid red;
+    float:left;
+    margin-right:5px;
+    margin-bottom:5px;
+    overflow:hidden;
+    border-radius:4px;
+
+}
+
+.buttons{
+    margin-top:10px;
+    margin-left:5px;
+}
