@@ -1,5 +1,6 @@
 ﻿
 var CARD_ARRAY = [];
+var SHUFFLE_ARRAY = [];
 
 function body_onload() {
     createCards();
@@ -44,6 +45,28 @@ function shuffleCards() {
         tempProps = card1.cloneProps();
         card1.setProps(card2.cloneProps());
         card2.setProps(tempProps);
+    }
+}
+
+function visuallyShuffleCards() {
+    for (var index = CARD_ARRAY.length - 1; index > 0; index--) {
+        var map = new Object();
+        map.index1 = index;
+        map.index2 = Math.floor(Math.random() * index);
+        SHUFFLE_ARRAY.push(map);
+    }
+    shuffleOneCard();
+}
+
+function shuffleOneCard() {
+    var map = SHUFFLE_ARRAY.pop();
+    if (map) {
+        var card1 = CARD_ARRAY[map.index1];
+        var card2 = CARD_ARRAY[map.index2];
+        var tempProps = card1.cloneProps();
+        card1.setProps(card2.cloneProps());
+        card2.setProps(tempProps);
+        setTimeout(shuffleOneCard, 200);
     }
 }
 
