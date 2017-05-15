@@ -2,9 +2,11 @@
 
 function Card(props, container) {
 
+
     const img = document.createElement("img");
     const div = document.createElement("div");
     const originalProps = props;
+
 
     let currentProps = originalProps.getClone();
 
@@ -22,7 +24,7 @@ function Card(props, container) {
         apply();
     }
 
-    this.reset = new function() {
+    this.reset = function() {
         currentProps = originalProps.getClone()
         apply();
     }
