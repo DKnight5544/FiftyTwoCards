@@ -1,4 +1,4 @@
-﻿'use strict';
+﻿
 
 function Props(borderColor, marginTop, marginLeft, numericID) {
 

@@ -1,56 +1,56 @@
 ﻿
-'use strict';
-
-const CARD_ARRAY = [];
-const SHUFFLE_ARRAY = [];
+var CARD_ARRAY = [];
+var SHUFFLE_ARRAY = [];
 
 function body_onload() {
     createCards();
 }
 
+
 function createCards() {
+    addValues(0);
+    addValues(1);
+    addValues(3);
+    addValues(2);
+}
 
-    const container = document.getElementById("mainContainer");
-    const suitValueArray = [0, 1, 3, 2];
+function addValues(suit) {
+    var container = document.getElementById("mainContainer");
+    for (var value = 0; value < 13; value++) {
 
-    for (let row = 0; row < 4; row++) {
-        let suit = suitValueArray[row];
-        for (let value = 0; value < 13; value++) {
+        var borderColor = (suit === 0 || suit === 3) ? "black" : "red";
+        var marginTop = (-2 - (suit * 123)).toString() + "px";
+        var marginLeft = (-2 - (value * 79)).toString() + "px";
+        var numericID = (suit * 13) + value;
 
-            const borderColor = (suit === 0 || suit === 3) ? "black" : "red";
-            const marginTop = (-2 - (suit * 123)).toString() + "px";
-            const marginLeft = (-2 - (value * 79)).toString() + "px";
-            const numericID = (suit * 13) + value;
+        var props = new Props(borderColor, marginTop, marginLeft, numericID);
+        var card = new Card(props, container);
 
-            const props = new Props(borderColor, marginTop, marginLeft, numericID);
-            const card = new Card(props, container);
-
-            CARD_ARRAY.push(card);
-        }
+        CARD_ARRAY.push(card);
     }
 }
 
-
 function reset() {
-    for (let index = 0; index < CARD_ARRAY.length ; index++) {
+    for (var index = 0; index < CARD_ARRAY.length ; index++) {
         CARD_ARRAY[index].reset();
     }
 }
 
 function shuffleCards() {
-    for (let index = CARD_ARRAY.length - 1; index > 0; index--) {
-        let swapIndex = Math.floor(Math.random() * index);
-        let card1 = CARD_ARRAY[index];
-        let card2 = CARD_ARRAY[swapIndex];
-        let tempProps = card1.cloneProps();
+    var swapIndex, card1, card2, tempProps;
+    for (var index = CARD_ARRAY.length - 1; index > 0; index--) {
+        swapIndex = Math.floor(Math.random() * index);
+        card1 = CARD_ARRAY[index];
+        card2 = CARD_ARRAY[swapIndex];
+        tempProps = card1.cloneProps();
         card1.setProps(card2.cloneProps());
         card2.setProps(tempProps);
     }
 }
 
 function visuallyShuffleCards() {
-    for (let index = CARD_ARRAY.length - 1; index > 0; index--) {
-        const map = new Object();
+    for (var index = CARD_ARRAY.length - 1; index > 0; index--) {
+        var map = new Object();
         map.index1 = index;
         map.index2 = Math.floor(Math.random() * index);
         SHUFFLE_ARRAY.push(map);
@@ -59,11 +59,11 @@ function visuallyShuffleCards() {
 }
 
 function shuffleOneCard() {
-    const map = SHUFFLE_ARRAY.shift();
+    var map = SHUFFLE_ARRAY.shift();
     if (map) {
-        const card1 = CARD_ARRAY[map.index1];
-        const card2 = CARD_ARRAY[map.index2];
-        const tempProps = card1.cloneProps();
+        var card1 = CARD_ARRAY[map.index1];
+        var card2 = CARD_ARRAY[map.index2];
+        var tempProps = card1.cloneProps();
         card1.setProps(card2.cloneProps());
         card2.setProps(tempProps);
         setTimeout(shuffleOneCard, 200);
@@ -80,13 +80,13 @@ function test_CardCount() {
 
 function test_CardsShouldBeUnique(shuffleCount) {
 
-    const testArray = new Uint8Array(CARD_ARRAY.length);
+    var testArray = new Uint8Array(CARD_ARRAY.length);
 
-    for (let count = 0; count < shuffleCount; count++) shuffleCards();
+    for (var count = 0; count < shuffleCount; count++) { shuffleCards(); }
 
-    for (let index = 0; index < CARD_ARRAY.length; index++) {
-        const card = CARD_ARRAY[index];
-        const cardIndex = card.getNumericID();
+    for (var index = 0; index < CARD_ARRAY.length; index++) {
+        var card = CARD_ARRAY[index];
+        var cardIndex = card.getNumericID();
         testArray[cardIndex]++;
         if (testArray[cardIndex] > 1) return cardIndex;
     }
@@ -96,11 +96,11 @@ function test_CardsShouldBeUnique(shuffleCount) {
 
 function test_CorrectIndexTotal(shuffleCount) {
 
-    let indexTotal = 0;
+    var indexTotal = 0;
 
-    for (let count = 0; count < shuffleCount; count++) { shuffleCards(); }
+    for (var count = 0; count < shuffleCount; count++) { shuffleCards(); }
 
-    for (let index = 0; index < CARD_ARRAY.length; index++) {
+    for (var index = 0; index < CARD_ARRAY.length; index++) {
         indexTotal += CARD_ARRAY[index].getNumericID();
     }
 
@@ -110,18 +110,18 @@ function test_CorrectIndexTotal(shuffleCount) {
 
 function test_isResetWorking() {
 
-    const originalValuesArray = [];
-    const suitValueArray = [0, 1, 3, 2];
-    for (let row = 0; row < 4; row++) {
-        let suit = suitValueArray[row];
-        for (let col = 0; col < 13; col++) {
+    var originalValuesArray = [];
+    var suitValueArray = [0, 1, 3, 2];
+    for (var row = 0; row < 4; row++) {
+        var suit = suitValueArray[row];
+        for (var col = 0; col < 13; col++) {
             originalValuesArray.push((suit * 13) + col);
         }
     }
 
     reset();
 
-    for (let index = 0; index < CARD_ARRAY.length; index++) {
+    for (var index = 0; index < CARD_ARRAY.length; index++) {
         if (originalValuesArray[index] != CARD_ARRAY[index].getNumericID()) return false;
     }
 
