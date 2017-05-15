@@ -55,11 +55,11 @@ function visuallyShuffleCards() {
         map.index2 = Math.floor(Math.random() * index);
         SHUFFLE_ARRAY.push(map);
     }
-    shuffleOneCard();
+    if (SHUFFLE_ARRAY.length === 51) shuffleOneCard();
 }
 
 function shuffleOneCard() {
-    var map = SHUFFLE_ARRAY.pop();
+    var map = SHUFFLE_ARRAY.shift();
     if (map) {
         var card1 = CARD_ARRAY[map.index1];
         var card2 = CARD_ARRAY[map.index2];
