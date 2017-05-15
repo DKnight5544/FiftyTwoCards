@@ -1,19 +1,13 @@
-﻿
+﻿'use strict';
+
 function Card(props, container) {
 
-    var img = document.createElement("img");
-    img.src = "cardz.png";
+    const img = document.createElement("img");
+    const div = document.createElement("div");
+    const originalProps = props;
 
-    var div = document.createElement("div");
-    div.className = "card";
-    div.img = img;
-    div.appendChild(img);
+    let currentProps = originalProps.getClone();
 
-    if (container) container.appendChild(div);
-
-    var originalProps = props;
-    var currentProps = originalProps.getClone();
-    apply();
 
     this.getNumericID = function () {
         return currentProps.numericID;
@@ -28,13 +22,19 @@ function Card(props, container) {
         apply();
     }
 
-    this.reset = reset;
-
-
-    function reset() {
+    this.reset = new function() {
         currentProps = originalProps.getClone()
         apply();
     }
+
+    img.src = "cardz.png";
+    div.className = "card";
+    div.img = img;
+    div.appendChild(img);
+
+    if (container) container.appendChild(div);
+
+    apply();
 
     function apply() {
         div.style.borderColor = currentProps.borderColor;
