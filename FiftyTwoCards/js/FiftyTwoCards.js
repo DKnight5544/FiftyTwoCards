@@ -3,7 +3,7 @@
 
 const CARD_ARRAY = [];
 const SHUFFLE_ARRAY = [];
-const SUIT_ORDER_ARRAY = [0, 1, 3, 2];
+const SUIT_ORDER_ARRAY = [0, 1, 2, 3];
 const CARD_VALUE_ARRAY = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 
 function body_onload() {
@@ -72,6 +72,12 @@ function shuffleOneCard() {
 function switchSizes() {
     CARD_ARRAY.forEach(function (card) {
         card.switchSizes();
+    })
+}
+
+function flip() {
+    CARD_ARRAY.forEach(function (card) {
+        card.flip();
     })
 }
 
