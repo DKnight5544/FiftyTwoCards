@@ -4,6 +4,7 @@ function Card(props, container) {
 
 
     const img = document.createElement("img");
+    const img2 = document.createElement("img");
     const div = document.createElement("div");
     const originalProps = props;
 
@@ -31,7 +32,7 @@ function Card(props, container) {
         apply();
     }
 
-    this.reset = function() {
+    this.reset = function () {
         currentProps = originalProps.getClone()
         apply();
     }
@@ -47,7 +48,18 @@ function Card(props, container) {
         }
     }
 
+    let curImg = 1;
+    this.flip = function () {
+        curImg = 3 - curImg;
+        img.src = (curImg === 1) ? "cardz.png" : "shiftwise.png";
+    }
+
     img.src = "cardz.png";
+    img.style.width = "1027px";
+    img.style.height = "492px";
+
+    img2.src = "shiftwise.png"; //pre-load
+
     div.className = "card";
     div.style.width = large_width;
     div.style.height = large_height;
