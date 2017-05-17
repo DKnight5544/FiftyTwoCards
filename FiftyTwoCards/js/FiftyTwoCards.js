@@ -69,3 +69,9 @@ function shuffleOneCard() {
     }
 }
 
+function switchSizes() {
+    CARD_ARRAY.forEach(function (card) {
+        card.switchSizes();
+    })
+}
+

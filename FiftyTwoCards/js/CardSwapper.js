@@ -2,8 +2,8 @@
 'use strict';
 
 function CardSwapper(card1, card2) {
-    let c1 = card1;
-    let c2 = card2;
+    const c1 = card1;
+    const c2 = card2;
 
     this.swap = function () {
         const props = c1.cloneProps();
