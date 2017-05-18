@@ -29,12 +29,12 @@ function Card(props, container) {
 
     this.setProps = function (props) {
         currentProps = props;
-        apply();
+        render();
     }
 
     this.reset = function () {
         currentProps = originalProps.getClone()
-        apply();
+        render();
     }
 
     this.switchSizes = function () {
@@ -69,9 +69,9 @@ function Card(props, container) {
 
     if (container) container.appendChild(div);
 
-    apply();
+    render();
 
-    function apply() {
+    function render() {
         div.style.borderColor = currentProps.borderColor;
         div.img.style.marginTop = currentProps.marginTop;
         div.img.style.marginLeft = currentProps.marginLeft;
